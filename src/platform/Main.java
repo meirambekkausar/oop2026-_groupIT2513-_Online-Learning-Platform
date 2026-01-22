@@ -21,7 +21,7 @@ public class Main {
         LessonRepository lessonRepo = new LessonRepository();
         while (true) {
             System.out.println("""
-                    
+                    --Welcome to Online Learning platform!--
                     1. Create course
                     2. Create lesson
                     3. Enroll user to course
