@@ -6,7 +6,8 @@ import platform.entity.Lesson;
 import java.sql.*;
 import java.util.Optional;
 
-public class LessonRepository {
+public class LessonRepository implements LessonRepositoryInterface {
+    @Override
 
     public Optional<Lesson> findById(long id) throws SQLException {
         String sql = "select * from lessons where id = ?";
@@ -27,7 +28,7 @@ public class LessonRepository {
             return Optional.empty();
         }
     }
-
+     @Override
     public int countByCourse(int courseId) throws SQLException {
         String sql = "select count(*) from lessons where course_id = ?";
 
@@ -40,6 +41,7 @@ public class LessonRepository {
             return rs.getInt(1);
         }
     }
+    @Override
     public Lesson save(Long courseId, String title) throws SQLException {
         String sql = """
             INSERT INTO lessons(course_id, title)

@@ -4,8 +4,8 @@ import platform.config.DatabaseConfig;
 
 import java.sql.*;
 
-public class EnrollmentRepository {
-
+public class EnrollmentRepository implements EnrollmentRepositoryInterface {
+    @Override
     public boolean exists(int userId, int courseId) throws SQLException {
         String sql = "select 1 from enrollments where user_id=? and course_id=?";
 
@@ -17,7 +17,7 @@ public class EnrollmentRepository {
             return ps.executeQuery().next();
         }
     }
-
+    @Override
     public void save(int userId, int courseId) throws SQLException {
         String sql = "insert into enrollments(user_id, course_id) values (?, ?)";
 
