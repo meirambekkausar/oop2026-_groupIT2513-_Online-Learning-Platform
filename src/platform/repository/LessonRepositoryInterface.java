@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public interface LessonRepositoryInterface {
 
-    Optional<Lesson> findById(long id) throws SQLException;
+    public Optional<Lesson> findById(long id) throws SQLException;
 
-    int countByCourse(int courseId) throws SQLException;
+    public int countByCourse(int courseId) throws SQLException;
 
-    Lesson save(Long courseId, String title) throws SQLException;
+    public Lesson save(Long courseId, String title) throws SQLException;
 }
 

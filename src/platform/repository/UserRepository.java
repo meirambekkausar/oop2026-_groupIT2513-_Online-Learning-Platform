@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserRepository {
+public class UserRepository implements UserRepositoryInterface {
 
     public User save(String name, String email) throws SQLException {
         String sql = """

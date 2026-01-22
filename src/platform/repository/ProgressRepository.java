@@ -4,7 +4,7 @@ import platform.config.DatabaseConfig;
 
 import java.sql.*;
 
-public class ProgressRepository {
+public class ProgressRepository implements ProgressRepositoryInterface {
 
     public void markCompleted(int userId, int lessonId) throws SQLException {
         String sql = """

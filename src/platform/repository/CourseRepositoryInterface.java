@@ -11,5 +11,5 @@ public interface CourseRepositoryInterface {
 
     public Course findById(int id) throws SQLException;
     public Course save(String title) throws SQLException;
-    List<Course> findAll();
+    public List<Course> findAll();
 }
