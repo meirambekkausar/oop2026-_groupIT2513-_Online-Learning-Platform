@@ -88,13 +88,12 @@ public class Main {
                 case 7 -> {
                     System.out.println("All courses:");
                     for (Course c : courseService.listAllCourses()) {
-                        System.out.println(c.getId() + " | " + c.getTitle());
+                        System.out.println(c.getId() + " | " + c.getTitle() + " | " + c.isArchived());
                     }
                 }
                 case 0 -> {
                     System.out.println("Goodbye!");
                     System.exit(0);
-                    break;
                 }
                 default -> System.out.println("Invalid option");
             }

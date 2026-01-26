@@ -57,7 +57,7 @@ public class CourseRepository implements CourseRepositoryInterface {
             INSERT INTO courses(title, archived)
             VALUES (?, false)
             RETURNING id;
-        """;
+        """;    
 
         try (Connection c = DatabaseConfig.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
