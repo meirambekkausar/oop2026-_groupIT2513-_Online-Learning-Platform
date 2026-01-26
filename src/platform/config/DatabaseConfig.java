@@ -14,8 +14,8 @@ public class DatabaseConfig {
     static {
         Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream("config.properties")) {
-            properties.load(fis);  // load all key=value pairs from the file
-            PASSWORD = properties.getProperty("DB_PASSWORD");  // copy the DB_PASSWORD value into PASSWORD
+            properties.load(fis);
+            PASSWORD = properties.getProperty("DB_PASSWORD");
         } catch (IOException e) {
             throw new RuntimeException("Cannot load database password", e);
         }
