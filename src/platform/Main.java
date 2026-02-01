@@ -1,13 +1,11 @@
 package platform;
 
-import platform.entity.Course;
-import platform.entity.User;
-import platform.entity.Lesson;
-import platform.repository.CourseRepository;
+import platform.entity.*;
 import platform.repository.LessonRepository;
+import platform.repository.CourseRepository;
 import platform.service.*;
 
-import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,9 +14,11 @@ public class Main {
         CourseService courseService = new CourseService();
         LessonService lessonService = new LessonService();
         ProgressService progressService = new ProgressService();
+        UserService userService = new UserService();
 
         CourseRepository courseRepo = new CourseRepository();
         LessonRepository lessonRepo = new LessonRepository();
+
         while (true) {
             System.out.println("""
                     --Welcome to Online Learning platform!--
@@ -29,28 +29,56 @@ public class Main {
                     5. Mark lesson completed
                     6. Show course progress
                     7. Show all courses
+                    8. Show active courses with lesson types
                     0. Exit
                     """);
+
             int choice = cin.nextInt();
             cin.nextLine();
+
             switch (choice) {
                 case 1 -> {
                     System.out.print("Course title: ");
-                    //  cin.nextLine();
                     String title = cin.nextLine();
-                    Course fg = courseRepo.save(title);
-                    System.out.println("Course created successfully, ID: " + fg.getId());
+                    Course c = courseService.createCourse(title);
+                    System.out.println("Course created successfully, ID: " + c.getId());
                 }
                 case 2 -> {
                     System.out.print("Course ID: ");
                     Long courseId = cin.nextLong();
+                    cin.nextLine();
 
                     System.out.print("Lesson title: ");
-                    cin.nextLine();
                     String lessonTitle = cin.nextLine();
-                    lessonRepo.save(courseId, lessonTitle);
-                    System.out.println("Lesson created");
+
+                    System.out.print("Lesson type (video/text/quiz): ");
+                    String lessonType = cin.nextLine().toLowerCase();
+
+                    String content = "";
+                    switch (lessonType) {
+                        case "video" -> {
+                            System.out.print("Video URL: ");
+                            content = cin.nextLine();
+                        }
+                        case "text" -> {
+                            System.out.print("Text content: ");
+                            content = cin.nextLine();
+                        }
+                        case "quiz" -> {
+                            System.out.print("Enter quiz questions separated by commas: ");
+                            content = cin.nextLine();
+                        }
+                        default -> {
+                            System.out.println("Invalid lesson type!");
+                            break;
+                        }
+                    }
+
+                    Lesson c = lessonService.createLesson(courseId, lessonTitle, lessonType, content);
+                    System.out.println("Lesson created successfully!");
+                    System.out.println("Course created successfully, Lesson ID: " + c.getId());
                 }
+
                 case 3 -> {
                     System.out.print("User ID: ");
                     Long userId = cin.nextLong();
@@ -78,17 +106,31 @@ public class Main {
                 case 6 -> {
                     System.out.print("User ID: ");
                     Long userId = cin.nextLong();
-
                     System.out.print("Course ID: ");
                     Long courseId = cin.nextLong();
-                    int gh = (int) progressService.getProgress(Math.toIntExact(userId), Math.toIntExact(courseId));
-
-                    System.out.println("Course progress: " + gh + "%");
+                    int progress = (int) progressService.getProgress(Math.toIntExact(userId), Math.toIntExact(courseId));
+                    System.out.println("Course progress: " + progress + "%");
                 }
                 case 7 -> {
                     System.out.println("All courses:");
                     for (Course c : courseService.listAllCourses()) {
                         System.out.println(c.getId() + " | " + c.getTitle() + " | " + c.isArchived());
+                    }
+                }
+                case 8 -> {
+                    List<Course> activeCourses = courseService.listAllCourses().stream()
+                            .filter(c -> !c.isArchived())
+                            .toList();
+
+                    for (Course course : activeCourses) {
+                        System.out.println("Course: " + course.getTitle());
+                        List<Lesson> lessons = lessonRepo.findByCourseId(course.getId());
+                        lessons.forEach(l -> {
+                            System.out.print(" - " + l.getTitle() + " (Type: ");
+                            if (l instanceof VideoLesson) System.out.println("Video)");
+                            else if (l instanceof TextLesson) System.out.println("Text)");
+                            else if (l instanceof QuizLesson) System.out.println("Quiz)");
+                        });
                     }
                 }
                 case 0 -> {
