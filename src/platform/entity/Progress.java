@@ -1,6 +1,5 @@
 package platform.entity;
 
-
 public class Progress {
     private int userId;
     private int lessonId;
@@ -11,5 +10,8 @@ public class Progress {
         this.lessonId = lessonId;
         this.completed = completed;
     }
-}
 
+    public int getUserId() { return userId; }
+    public int getLessonId() { return lessonId; }
+    public boolean isCompleted() { return completed; }
+}
