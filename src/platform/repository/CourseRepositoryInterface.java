@@ -1,15 +1,14 @@
 package platform.repository;
 
-import platform.entity.Course;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public interface CourseRepositoryInterface {
+public interface CourseRepositoryInterface<T, ID> {
 
+    Optional<T> findById(ID id) throws SQLException;
 
-    public Course findById(int id) throws SQLException;
-    public Course save(String title) throws SQLException;
-    public List<Course> findAll();
+    List<T> findAll() throws SQLException;
+
+    T save(T entity) throws SQLException;
 }

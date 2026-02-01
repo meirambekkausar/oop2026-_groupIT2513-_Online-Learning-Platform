@@ -2,37 +2,38 @@ package platform.repository;
 
 import platform.config.DatabaseConfig;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProgressRepository implements ProgressRepositoryInterface {
 
+    @Override
     public void markCompleted(int userId, int lessonId) throws SQLException {
         String sql = """
-            insert into progress(user_id, lesson_id, completed)
-            values (?, ?, true)
-            on conflict (user_id, lesson_id)
-            do update set completed = true
+            INSERT INTO progress(user_id, lesson_id, completed)
+            VALUES (?, ?, true)
+            ON CONFLICT (user_id, lesson_id)
+            DO UPDATE SET completed = true
         """;
-
-        try (Connection c = DatabaseConfig.getConnection();
+        try (Connection c = DatabaseConfig.getInstance().getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-
             ps.setInt(1, userId);
             ps.setInt(2, lessonId);
             ps.executeUpdate();
         }
     }
 
+    @Override
     public int countCompleted(int userId, int courseId) throws SQLException {
         String sql = """
-            select count(*) from progress p
-            join lessons l on p.lesson_id = l.id
-            where p.user_id=? and l.course_id=? and p.completed=true
+            SELECT COUNT(*) FROM progress p
+            JOIN lessons l ON p.lesson_id = l.id
+            WHERE p.user_id=? AND l.course_id=? AND p.completed=true
         """;
-
-        try (Connection c = DatabaseConfig.getConnection();
+        try (Connection c = DatabaseConfig.getInstance().getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
-
             ps.setInt(1, userId);
             ps.setInt(2, courseId);
             ResultSet rs = ps.executeQuery();

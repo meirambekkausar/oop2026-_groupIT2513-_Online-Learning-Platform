@@ -6,72 +6,60 @@ import platform.entity.Course;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class CourseRepository implements CourseRepositoryInterface {
+public class CourseRepository implements CourseRepositoryInterface<Course, Long> {
+
     @Override
-    public List<Course> findAll() {
-        List<Course> courses = new ArrayList<>();
-        String sql = "SELECT id, title, archived FROM courses";
-
-        try (Connection c = DatabaseConfig.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                courses.add(new Course(
-                        (int) rs.getLong("id"),
-                        rs.getString("title"),
-                        rs.getBoolean("archived")
-                ));
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return courses;
-    }
-    @Override
-    public Course findById(int id) throws SQLException {
-        String sql = "select * from courses where id = ?";
-
-        try (Connection c = DatabaseConfig.getConnection();
+    public Optional<Course> findById(Long id) throws SQLException {
+        String sql = "SELECT * FROM courses WHERE id=?";
+        try (Connection c = DatabaseConfig.getInstance().getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new Course(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getBoolean("archived")
-                );
+                return Optional.of(new Course.Builder(rs.getString("title"))
+                        .id((int) rs.getLong("id"))
+                        .build());
             }
-            return null;
         }
+        return Optional.empty();
     }
-    @Override
-    public Course save(String title) throws SQLException {
-        String sql = """
-            INSERT INTO courses(title, archived)
-            VALUES (?, false)
-            RETURNING id;
-        """;    
 
-        try (Connection c = DatabaseConfig.getConnection();
+    @Override
+    public List<Course> findAll() throws SQLException {
+        List<Course> list = new ArrayList<>();
+        String sql = "SELECT * FROM courses";
+        try (Connection c = DatabaseConfig.getInstance().getConnection();
+             Statement s = c.createStatement();
+             ResultSet rs = s.executeQuery(sql)) {
+
+            while (rs.next()) {
+                list.add(new Course.Builder(rs.getString("title"))
+                        .id((int) rs.getLong("id"))
+                        .build());
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Course save(Course course) throws SQLException {
+        String sql = "INSERT INTO courses(title, archived) VALUES (?, ?) RETURNING id";
+        try (Connection c = DatabaseConfig.getInstance().getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
 
-            ps.setString(1, title);
+            ps.setString(1, course.getTitle());
+            ps.setBoolean(2, false);
 
             ResultSet rs = ps.executeQuery();
             rs.next();
 
-            return new Course(
-                    (int) rs.getLong("id"),
-                    title,
-                    false
-            );
+            return new Course.Builder(course.getTitle())
+                    .id((int) rs.getLong("id"))
+                    .build();
         }
     }
 }
