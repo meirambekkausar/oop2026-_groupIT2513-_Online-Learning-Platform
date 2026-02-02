@@ -22,6 +22,7 @@ public class CourseRepository implements CourseRepositoryInterface<Course, Long>
             if (rs.next()) {
                 return Optional.of(new Course.Builder(rs.getString("title"))
                         .id((int) rs.getLong("id"))
+                        .archived(rs.getBoolean("archived"))
                         .build());
             }
         }
@@ -39,6 +40,7 @@ public class CourseRepository implements CourseRepositoryInterface<Course, Long>
             while (rs.next()) {
                 list.add(new Course.Builder(rs.getString("title"))
                         .id((int) rs.getLong("id"))
+                        .archived(rs.getBoolean("archived"))
                         .build());
             }
         }
