@@ -133,7 +133,7 @@ public class Main {
                         });
                     }
                 }
-                case 0 -> {
+                case 0 -> { 
                     System.out.println("Goodbye!");
                     System.exit(0);
                 }
