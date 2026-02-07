@@ -1,4 +1,4 @@
-package platform.exception;
+package platform.CourseManagementComponent;
 
 public class CourseArchivedException extends RuntimeException {
     public CourseArchivedException() {

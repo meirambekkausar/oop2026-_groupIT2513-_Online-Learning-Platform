@@ -1,9 +1,4 @@
-package platform.service;
-
-import platform.entity.Course;
-import platform.exception.CourseArchivedException;
-import platform.repository.CourseRepository;
-import platform.repository.EnrollmentRepository;
+package platform.CourseManagementComponent;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.UserManagementComponent;
 
 public class User {
     private Long id;

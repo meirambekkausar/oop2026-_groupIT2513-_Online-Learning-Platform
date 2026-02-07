@@ -1,8 +1,10 @@
 package platform;
 
+import platform.CourseManagementComponent.Course;
+import platform.CourseManagementComponent.CourseService;
 import platform.entity.*;
 import platform.repository.LessonRepository;
-import platform.repository.CourseRepository;
+import platform.CourseManagementComponent.CourseRepository;
 import platform.service.*;
 
 import java.util.List;

@@ -1,6 +1,5 @@
-package platform.repository;
+package platform.UserManagementComponent;
 
-import platform.entity.User;
 import java.sql.SQLException;
 
 public interface UserRepositoryInterface {

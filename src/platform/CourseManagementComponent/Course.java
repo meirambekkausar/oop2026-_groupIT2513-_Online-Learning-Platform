@@ -1,4 +1,6 @@
-package platform.entity;
+package platform.CourseManagementComponent;
+
+import platform.entity.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;

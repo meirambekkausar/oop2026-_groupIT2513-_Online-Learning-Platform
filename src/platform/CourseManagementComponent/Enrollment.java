@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.CourseManagementComponent;
 
 public class Enrollment {
     private int userId;

@@ -1,7 +1,7 @@
 package platform.service;
 
-import platform.entity.User;
-import platform.repository.UserRepository;
+import platform.UserManagementComponent.User;
+import platform.UserManagementComponent.UserRepository;
 
 public class UserService {
 

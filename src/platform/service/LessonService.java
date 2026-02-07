@@ -3,11 +3,10 @@ package platform.service;
 import platform.entity.Lesson;
 import platform.exception.LessonNotFoundException;
 import platform.exception.UserNotEnrolledException;
-import platform.repository.EnrollmentRepository;
+import platform.CourseManagementComponent.EnrollmentRepository;
 import platform.repository.LessonRepository;
 
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class LessonService {
 
@@ -22,7 +21,6 @@ public class LessonService {
     }
 
     public Lesson createLesson(long courseId, String title, String type, String content) throws SQLException {
-        // you can add validation here if needed
         if (!type.equals("video") && !type.equals("text") && !type.equals("quiz")) {
             throw new IllegalArgumentException("Invalid lesson type: " + type);
         }

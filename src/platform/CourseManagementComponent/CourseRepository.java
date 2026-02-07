@@ -1,7 +1,6 @@
-package platform.repository;
+package platform.CourseManagementComponent;
 
 import platform.config.DatabaseConfig;
-import platform.entity.Course;
 
 import java.sql.*;
 import java.util.ArrayList;

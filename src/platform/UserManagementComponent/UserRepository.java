@@ -1,7 +1,6 @@
-package platform.repository;
+package platform.UserManagementComponent;
 
 import platform.config.DatabaseConfig;
-import platform.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
