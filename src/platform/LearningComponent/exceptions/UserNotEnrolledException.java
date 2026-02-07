@@ -1,4 +1,4 @@
-package platform.exception;
+package platform.LearningComponent.exceptions;
 
 
 public class UserNotEnrolledException extends RuntimeException {

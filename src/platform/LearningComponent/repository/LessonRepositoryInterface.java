@@ -1,6 +1,6 @@
-package platform.repository;
+package platform.LearningComponent.repository;
 
-import platform.entity.Lesson;
+import platform.LearningComponent.entity.Lesson;
 
 import java.sql.SQLException;
 import java.util.List;

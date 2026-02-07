@@ -1,7 +1,6 @@
 package platform.CourseManagementComponent;
 
 import platform.config.DatabaseConfig;
-import platform.repository.EnrollmentRepositoryInterface;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

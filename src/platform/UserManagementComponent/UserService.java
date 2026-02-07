@@ -1,7 +1,4 @@
-package platform.service;
-
-import platform.UserManagementComponent.User;
-import platform.UserManagementComponent.UserRepository;
+package platform.UserManagementComponent;
 
 public class UserService {
 

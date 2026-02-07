@@ -1,8 +1,8 @@
-package platform.repository;
+package platform.LearningComponent.repository;
 
+import platform.LearningComponent.entity.Lesson;
+import platform.LearningComponent.entity.LessonFactory;
 import platform.config.DatabaseConfig;
-import platform.entity.Lesson;
-import platform.entity.LessonFactory;
 
 import java.sql.*;
 import java.util.ArrayList;

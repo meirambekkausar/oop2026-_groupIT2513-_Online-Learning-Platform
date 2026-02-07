@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.LearningComponent.entity;
 
 public class VideoLesson extends Lesson {
     private final String videoUrl;

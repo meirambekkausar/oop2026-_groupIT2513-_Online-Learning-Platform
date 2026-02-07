@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.LearningComponent.entity;
 
 public class Progress {
     private int userId;

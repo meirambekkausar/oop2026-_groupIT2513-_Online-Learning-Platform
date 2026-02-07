@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.LearningComponent.entity;
 
 public class LessonFactory {
     public static Lesson createLesson(String type, long id, long courseId, String title, Object content) {

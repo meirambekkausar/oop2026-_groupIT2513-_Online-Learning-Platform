@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.LearningComponent.entity;
 
 public abstract class Lesson {
     private long id;

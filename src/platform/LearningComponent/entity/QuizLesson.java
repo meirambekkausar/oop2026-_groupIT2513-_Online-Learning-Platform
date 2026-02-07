@@ -1,4 +1,4 @@
-package platform.entity;
+package platform.LearningComponent.entity;
 
 public class QuizLesson extends Lesson {
     private final String[] questions;

@@ -1,4 +1,4 @@
-package platform.repository;
+package platform.CourseManagementComponent;
 
 import java.sql.SQLException;
 

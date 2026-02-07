@@ -1,7 +1,7 @@
-package platform.service;
+package platform.LearningComponent.service;
 
-import platform.repository.LessonRepository;
-import platform.repository.ProgressRepository;
+import platform.LearningComponent.repository.LessonRepository;
+import platform.LearningComponent.repository.ProgressRepository;
 
 public class ProgressService {
 

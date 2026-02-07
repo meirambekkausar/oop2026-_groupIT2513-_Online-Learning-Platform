@@ -2,10 +2,15 @@ package platform;
 
 import platform.CourseManagementComponent.Course;
 import platform.CourseManagementComponent.CourseService;
-import platform.entity.*;
-import platform.repository.LessonRepository;
+import platform.LearningComponent.entity.Lesson;
+import platform.LearningComponent.entity.QuizLesson;
+import platform.LearningComponent.entity.TextLesson;
+import platform.LearningComponent.entity.VideoLesson;
+import platform.LearningComponent.service.LessonService;
+import platform.LearningComponent.service.ProgressService;
+import platform.UserManagementComponent.UserService;
+import platform.LearningComponent.repository.LessonRepository;
 import platform.CourseManagementComponent.CourseRepository;
-import platform.service.*;
 
 import java.util.List;
 import java.util.Scanner;

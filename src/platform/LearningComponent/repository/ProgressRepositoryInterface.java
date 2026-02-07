@@ -1,4 +1,4 @@
-package platform.repository;
+package platform.LearningComponent.repository;
 
 import java.sql.SQLException;
 

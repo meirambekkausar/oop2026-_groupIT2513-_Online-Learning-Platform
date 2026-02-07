@@ -1,10 +1,10 @@
-package platform.service;
+package platform.LearningComponent.service;
 
-import platform.entity.Lesson;
-import platform.exception.LessonNotFoundException;
-import platform.exception.UserNotEnrolledException;
 import platform.CourseManagementComponent.EnrollmentRepository;
-import platform.repository.LessonRepository;
+import platform.LearningComponent.entity.Lesson;
+import platform.LearningComponent.exceptions.LessonNotFoundException;
+import platform.LearningComponent.exceptions.UserNotEnrolledException;
+import platform.LearningComponent.repository.LessonRepository;
 
 import java.sql.SQLException;
 
